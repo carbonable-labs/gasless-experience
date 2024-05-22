@@ -19,9 +19,7 @@ export default function Home() {
             <BlockElement title="Wallet Information">
               <Wallet />
             </BlockElement>
-            <BlockElement title="Gas Information">
-              <GasWrapper />
-            </BlockElement>
+            
             <BlockElement title="Sign and Mint">
               <SignAndMintComponent />
             </BlockElement>

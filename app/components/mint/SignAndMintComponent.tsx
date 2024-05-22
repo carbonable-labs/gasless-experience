@@ -4,7 +4,9 @@ import useCalls from "@/app/hooks/useCalls";
 import { useAccount } from "@starknet-react/core";
 import { useState } from "react";
 import { useGasContext } from "../common/GasContext";
-import { executeCalls } from "@avnu/gasless-sdk";
+import { executeCalls, fetchBuildTypedData, fetchExecuteTransaction } from "@avnu/gasless-sdk";
+import buildTypedData from "@/app/actions/buildTypedData";
+import executeTransaction from "@/app/actions/executeTransaction";
 
 function SignAndMintComponent() {
   const { account } = useAccount();
@@ -23,34 +25,29 @@ function SignAndMintComponent() {
   };
 
   const onClickExecute = async () => {
-    if (!account || !gasTokenPrices.length) return;
+    if (!account) return;
     setLoading(true);
     setTx(undefined);
-    return executeCalls(
-      account,
-      calls,
-      {
-        gasTokenAddress: gasTokenPrices[0].tokenAddress,
-        maxGasTokenAmount,
-      },
-      options,
-    )
-      .then((response) => {
-        console.log('Transaction hash:', response);
-        setTx(response.transactionHash);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error(error);
-        setLoading(false);
-      });
+    const typedData = await buildTypedData(account.address, calls, undefined, undefined, options);
+    let signature = undefined;
+
+    try {
+      signature = await account.signMessage(typedData);
+    } catch (error) {
+      console.error('Error signing message:', error);
+      setLoading(false);
+      return;
+    }
+    const result = await executeTransaction(account.address, JSON.stringify(typedData), signature, options);
+    console.log('Transaction result:', result);
+    setLoading(false);
   };
 
   return (
       <div>
       {account && (
         <button 
-          disabled={!isValidJSON(JSON.stringify(calls)) || loading || !gasTokenPrices.length} 
+          disabled={!isValidJSON(JSON.stringify(calls)) || loading} 
           onClick={onClickExecute}
           className="uppercase bg-greenish-500 text-neutral-100 py-2 px-4 rounded-lg hover:bg-greenish-400"
         >

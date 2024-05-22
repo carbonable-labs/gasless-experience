@@ -45,7 +45,7 @@ function EstimatedFees() {
     }).catch((error) => {
       console.error('Error estimating gas fees:', error);
     });
-  }, [account, calls, gasTokenPrices, gaslessCompatibility, estimateCalls]);
+  }, [account, gasTokenPrices, gaslessCompatibility]);
   
   return (  
     <div className="text-neutral-300">
