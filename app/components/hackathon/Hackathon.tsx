@@ -1,4 +1,4 @@
-function Hackthon() {
+function Hackathon() {
   return (
     <div className="rounded-lg border border-neutral-600 bg-opacityLight-5 p-4">
       <div>
@@ -12,29 +12,26 @@ function Hackthon() {
         <p className="text-neutral-300">Retrieve available payment tokens 🟢</p>
         <p className="text-neutral-300">Get typed data 🟢</p>
         <p className="text-neutral-300">Sign typed data 🟢</p>
+        <p className="text-neutral-300">Execute from outside 🟢</p>
       </div>
       <div className="mt-4">
-        <h2 className="text-xl font-bold">Remaining points</h2>
+        <h2 className="text-xl font-bold">Outstanding points</h2>
         <p className="text-neutral-300">Estimate gas fees 🟠</p>
-        <p className="text-neutral-300">Execute from outside 🔴</p>
       </div>
       <div className="mt-4">
         <h2 className="text-xl font-bold">Conclusion</h2>
         <p className="text-neutral-300">
-          The AVNU gasless sdk is quite easy to integrate but still needs some improvements to make it more user friendly.
+          The AVNU gasless sdk is quite easy to integrate.
         </p>
         <p className="text-neutral-300">
-          It&apos;s a bit early to say if it can be used in production but it has a lot of potential.
+          We might want to perform the transaction execution ourselves to have more control over the process. But it is hard to manage due to nonce management.
         </p>
         <p className="text-neutral-300">
-          We might want to perform the transaction execution ourselves to have more control over the process.
-        </p>
-        <p className="text-neutral-300">
-          Currently the transaction fees payment to avnu is a manual process and an api key is needed.
+          For production, we will need to provision a wallet to pay the transaction fees on behalf of the users.
         </p>
       </div>
     </div>
   )
 }
 
-export default Hackthon;
+export default Hackathon;

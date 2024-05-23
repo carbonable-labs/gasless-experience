@@ -4,7 +4,6 @@ import useCalls from "@/app/hooks/useCalls";
 import { useAccount } from "@starknet-react/core";
 import { useState } from "react";
 import { useGasContext } from "../common/GasContext";
-import { executeCalls, fetchBuildTypedData, fetchExecuteTransaction } from "@avnu/gasless-sdk";
 import buildTypedData from "@/app/actions/buildTypedData";
 import executeTransaction from "@/app/actions/executeTransaction";
 
@@ -28,6 +27,7 @@ function SignAndMintComponent() {
     if (!account) return;
     setLoading(true);
     setTx(undefined);
+
     const typedData = await buildTypedData(account.address, calls, undefined, undefined, options);
     let signature = undefined;
 
@@ -44,7 +44,7 @@ function SignAndMintComponent() {
   };
 
   return (
-      <div>
+    <div>
       {account && (
         <button 
           disabled={!isValidJSON(JSON.stringify(calls)) || loading} 

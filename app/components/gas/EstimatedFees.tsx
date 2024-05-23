@@ -13,16 +13,7 @@ function EstimatedFees() {
 
   const estimateCalls = useCallback(
     async (account: AccountInterface, calls: Call[]): Promise<EstimateFeeResponse> => {
-      const contractVersion = await provider.getContractVersion(account.address);
-      const nonce = await provider.getNonceForAddress(account.address);
-      const details = stark.v3Details({ skipValidate: true });
-      const invocation = {
-        ...details,
-        contractAddress: account.address,
-        calldata: transaction.getExecuteCalldata(calls, contractVersion.cairo),
-        signature: [],
-      };
-      return provider.getInvokeEstimateFee({ ...invocation }, { ...details, nonce }, 'pending', true);
+      return await account.estimateInvokeFee(calls, { blockIdentifier: 'latest', skipValidate: true });
     },
     [provider],
   );
