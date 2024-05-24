@@ -1,8 +1,27 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Carbonable Gasless
+
+This project is a POC to showcase how to use AVNU gasless-sdk to allow your customer to interact with the blockchain without having to pay for gas fees.
 
 ## Getting Started
+### Prerequisites
+Ask AVNU for an API key and set it as an environment variable.
 
-First, run the development server:
+### Environment Variables
+NEXT_PUBLIC_NETWORK=sepolia|mainnet
+AVNU_API_KEY=your-private-key
+
+### Installation
+
+```bash
+npm install
+# or
+yarn install
+# or
+pnpm install
+# or
+bun install
+```
+### Running the development server
 
 ```bash
 npm run dev
@@ -14,23 +33,10 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## How to use the example
+1. [Mint](https://sepolia.voyager.online/contract/0x075b439cc965cea7e5ac09d7cf15043ad8fe15447423a51bbcb789f8ec659d8c#writeContract) some fake USDC on sepolia network
+2. Connect your wallet
+3. Click on Sign and Mint
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Going further
+You can modify the calls in the useCalls.ts file to interact with the blockchain as you wish.
